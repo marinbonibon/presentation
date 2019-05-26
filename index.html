@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/league.css">
+		<link rel="stylesheet" href="css/style.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
@@ -29,13 +30,305 @@
 					<img src="img/lodash.jpg" alt="lodash" width="600" height="391">
 					<p>Speaker: <span class="highlight">Maryna Petrenko</span></p>
 					<aside class="notes">
-						Hi everyone, my name is Marina and today  I’m going to tell you about Lodash.
+						Hi everyone, my name is Marina and today I’m going to tell you about Lodash.
 					</aside>
 				</section>
-				<section>Slide 2</section>
+				<section>
+					<section><h1>What is Lodash?</h1>
+						<img class="logo" src="img/220px-Lodash.svg.png" alt="logo" height="220" width="220">
+						<aside class="notes">
+							I would like to start with its definition and a little background.
+							So what is Lodash?
+						</aside>
+					</section>
+					<section>
+						<span class="highlight">Lodash</span> is a <span class="highlight">JavaScript library</span> which provides
+						utility functions for common programming tasks using the 
+						<span class="highlight">functional programming</span> paradigm
+						<aside class="notes">
+							In other words Lodash makes programmers’ life easier by providing ready-to-use functions for working with
+							various objects and helps programmers write concise and maintainable code.
+						</aside>
+					</section>
+				</section>
+				<section>
+					<h2>History</h2>
+					<figure class="fragment">
+						<img src="img/jdalton.jpeg" alt="John-David Dalton" width="300" height="300">
+						<figcaption class="highlight">John-David Dalton (@jdalton)</figcaption>
+					</figure>
+					<p class="fragment"><span class="highlight">Initial release‎:</span>‎ April 23, 2012</p>
+					<aside class="notes">The original author of Lodash is John-David Dalton. The initial release came out on
+						April 23, 2012. From the start, Lodash was created as a fork of Underscore.js library,
+						but since then has managed to become its superset, adding new features and performing much better.</aside>
+				</section>
+				<section>
+					<section><h2>How to begin?</h2></section>
+					<section>
+						<h3>In a browser</h3>
+						<div class="fragment">
+							<span class="highlight">CDN</span>
+							<pre><code class="code"><script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+							</code></pre>
+						</div>
+						<div class="fragment">
+							<span class="highlight">Build</span>
+							<pre><code class="code"><script src="lodash.js"></script></code></pre>
+						</div>
+						<aside class="notes">To install Lodash in a browser you may use external url. Or download the build.</aside>
+					</section>
+					<section>
+						<h3>Using npm</h3>
+						<pre><code class="code">$ npm i -g npm
+$ npm i --save lodash</code></pre>
+						<aside class="notes">Also you can use npm</aside>
+					</section>
+					<section>
+						<h3>in Node.js</h3>
+						<pre><code class="code">// Load the full build.
+var _ = require('lodash');
+// Load the core build.
+var _ = require('lodash/core');
+// Load the FP build for immutable auto-curried iteratee-first data-last methods.
+var fp = require('lodash/fp');
+
+// Load method categories.
+var array = require('lodash/array');
+var object = require('lodash/fp/object');
+
+// Cherry-pick methods for smaller browserify/rollup/webpack bundles.
+var at = require('lodash/at');
+var curryN = require('lodash/fp/curryN');</code></pre>
+						<aside class="notes">Or Node.js And voila, you can use Lodash methods in your application</aside>
+					</section>
+				</section>
+				<section>
+					<h2>Documentation is here:</h2>
+					<a  class="highlight" href="https://lodash.com" target="_blank">https://lodash.com</a>
+					<aside class="notes">
+						The documentation and detailed description of all Lodash methods you can find on lodash.com</aside>
+				</section>
+				<section>
+					<img src="img/why.jpg" alt="why use Lodash" width="400" height="400" style="display: block; margin: 0 auto">
+					<ul class="list">
+						<li class="fragment highlight">Compatibility</li>
+						<li class="fragment highlight">Modularity</li>
+						<li class="fragment highlight">Clear and functional syntax</li>
+						<li class="fragment highlight">High-quality documentation</li>
+					</ul>
+					<aside class="notes">
+						You may ask “Why should I use Lodash instead ES6, when it has a lot of duplicated methods?”
+						To answer this question, I want to list some of Lodash advantages that I found.
+
+						The first is compatibility. You don't have to worry about it. Lodash works on all browsers, even on old ones.
+						Next is modularity. Lodash functions are broken into separate modules, and you may only import a specific
+						module or just one function rather than importing the whole library
+						Next one is clear and functional syntax that enables writing more concise code.
+						And the last one is high-quality documentation, where you can find full description of all methods with
+						examples, choose the version of Lodash and so on.
+						Now, let’s proceed to one interesting example.</aside>
+				</section>
+				<section>
+					<h3>_.map vs .map</h3>
+					<pre><code>// Lodash
+  const users = [
+    { 'user': 'Bob' },
+    { 'user': 'Ted' }
+  ];
+  const arr = _.map(users, 'user');
+  console.log(arr);
+  // output: ['Bob', 'Ted']
+</code>
+  <code>// Native
+  const users = [
+    { 'user': 'Bob' },
+    { 'user': 'Ted' }
+  ];
+  const arr = users.map('user');
+  // error!</code></pre>
+					<aside class="notes">
+						Let’s imagine that you have an array of objects and you need to get its properties. Lodash map can do this
+						using the _.property iteratee shorthand, but native map doesn't support it. Instead, you should write
+						something like this.
+					</aside>
+				</section>
+				<section>
+					<pre><code>const users = [
+    { 'user': 'Bob' },
+    { 'user': 'Ted' }
+  ];
+  const arr = users.map( obj => obj.name );
+  // output: ['Bob', 'Ted']</code></pre>
+				</section>
+				<section>
+					<h2>Lodash can be broken down into several main areas:</h2>
+					<ul class="list" style="vertical-align: text-top;">
+						<li>Array</li>
+						<li>Collection</li>
+						<li>Date</li>
+						<li>Function</li>
+					</ul>
+					<ul class="list" style="vertical-align: text-top;">
+						<li>Lang</li>
+						<li>Math</li>
+						<li>Number</li>
+						<li>Object</li>
+						<li>Seq</li>
+					</ul>
+					<ul class="list" style="vertical-align: text-top;">
+						<li>String</li>
+						<li>Util</li>
+						<li>Properties</li>
+						<li>Methods</li>
+					</ul>
+					<aside class="notes">Lodash modules</aside>
+				</section>
+				<section>
+					<h2>Array</h2>
+					<figure>
+						<figcaption class="highlight">_.chunk(array, [size=1])</figcaption>
+						<img src="img/chunk-lodash.png" alt="chunk method" width="690" height="150">
+					</figure>
+					<figure class="fragment">
+						<img src="img/chunk-native.png" alt="chunk method" width="690" height="300">
+					</figure>
+					<aside class="notes">
+						Naturally, all Lodash array methods work on arrays. It's probably the biggest collection of Lodash methods.
+						Let's take a look on chunk method, that creates an array of elements split into groups the length of size.
+						If array can't be split evenly, the final chunk will be the remaining elements.
+						And here you can see how it will looks like in native JS. I think Lodash method is pretty good.
+					</aside>
+				</section>
+				<section>
+					<h2>Collection</h2>
+						<p class="highlight">_.size(collection)</p>
+					<pre><code>// Lodash
+const result = _.size({one: 1, two: 2, three: 3});
+console.log(result)
+// output: 3</code></pre>
+					<pre class="fragment"><code>// Native
+const result = Object.keys({one: 1, two: 2, three: 3}).length;
+console.log(result2)
+// output: 3</code></pre>
+					<aside class="notes">This group includes methods that can be used to work with arrays, objects and strings.
+						Size method returns the collection size. Let's compare the implementations. I think Lodash variant is
+						more convenient</aside>
+				</section>
+				<section>
+					<h2>Date</h2>
+					<figure>
+						<figcaption class="highlight">_.now()</figcaption>
+						<img src="img/now.png" alt="now method" width="1200" height="268">
+					</figure>
+					<aside class="notes">When it comes to date collection, there's only one method - now.</aside>
+				</section>
+				<section>
+					<h2>Function</h2>
+					<figure>
+						<figcaption class="highlight">_.flip(func)</figcaption>
+						<img src="img/flip.png" alt="flip method" width="778" height="350">
+					</figure>
+					<aside class="notes">Function collection probably includes some of the most complex methods.
+						Lodash provides us with many helpful shorthands for some of the functions-related stuff. 
+						For example, method flip creates a function that invokes func with arguments reversed.
+					</aside>
+				</section>
+				<section>
+					<h2>Lang</h2>
+					<figure>
+						<figcaption class="highlight">_.clone(value)</figcaption>
+						<img src="img/clone.png" alt="clone method" width="778" height="350">
+					</figure>
+					<aside class="notes">Lang collection is very diversified. It contains methods that work on a variety of data
+						types. These cover various is checks (e.g. _.isArray(), _.isNumber()), value conversions (e.g. _.toNumber(),
+						 _.toString()), cloning and deep cloning functionalities.
+						Clone method creates a shallow clone of value.</aside>
+				</section>
+				<section>
+					<h2>Math</h2>
+					<figure>
+						<figcaption class="highlight">_.mean(array)</figcaption>
+						<img src="img/mean.png" alt="mean method" width="640" height="186">
+					</figure>
+					<aside class="notes">Math collection that operates on number arrays can prove to be quite useful,
+						for example let’s take a look on _.mean(array)  method, that computes the mean of the values in array.</aside>
+				</section>
+				<section>
+					<h2>Number</h2>
+					<figure>
+						<figcaption class="highlight">_.random([lower=0], [upper=1], [floating])</figcaption>
+						<img src="img/random.png" alt="random method" width="914" height="404">
+					</figure>
+					<aside class="notes">Number collection, in fact, includes only 3 methods i.e. _.clamp(), _.inRange() 
+						and _.random(), all of which provide some casual functionalities with additional features. 
+						Take _.random() for example. Instead of outputting completely random number, you can easily
+						limit it to a certain range and decide whether you want it to be an integer or floating-point 
+						number with just a simple set of arguments.
+					</aside>
+				</section>
+				<section>
+					<h2>Object</h2>
+					<figure>
+						<figcaption class="highlight">_.pick(object, [paths])</figcaption>
+						<img src="img/pick.png" alt="pick method" width="914" height="278">
+					</figure>
+					<aside class="notes">Object collection groups methods that work primarily on objects. 
+						Methods are connected with the iteration capabilities, object assignment , merging, cloning and differentiating.
+						Pick method creates an object composed of the picked object properties.</aside>
+				</section>
+				<section>
+					<h2>Seq</h2>
+					<p>
+						Seq is a collection of prototype methods, centered around one functionality - 
+						<span class="highlight">Lodash value wrapper (_()). </span> With such wrapper in place, you can omit the
+						repeating<span class="highlight"> _.</span> and use your methods directly on your value
+						<span class="highlight">(e.g. _(1).add(1))</span>
+					</p>
+					<aside class="notes">decription on slide</aside>
+				</section>
+				<section>
+					<h2>String</h2>
+					<figure>
+						<figcaption class="highlight">_.camelCase([string=‘'])</figcaption>
+						<img src="img/camelCase.png" alt="camelCase method" width="912" height="454">
+					</figure>
+					<aside class="notes">Methods from string collection cover some pretty useful capabilities like converting
+						between different case types, methods for swapping letters, string-array conversion, regex integration and more.
+						For example, method camelCase converts string to camel case.</aside>
+				</section>
+				<section>
+					<h2>Util</h2>
+					<figure>
+						<figcaption class="highlight">_.range([start=0], end, [step=1])</figcaption>
+						<img src="img/range.png" alt="range method" width="692" height="454">
+					</figure>
+					<aside class="notes">There isn't really any rule that groups all these methods together. Thus, there's almost
+						no method that has its direct native equivalent.
+						Method range creates an array of numbers (positive and/or negative) progressing from start up to, but not
+						including, end.
+					</aside>
+				</section>
+				<section>
+					<h2>Properties and Methods</h2>
+					<ul>
+						<li>templateSettings</li>
+						<li>_.VERSION</li>
+					</ul>
+					<aside class="notes"> And the last two  are Properties and methods:
+						Contain a small group of functions for dealing with templateSettings
+						Contains version information via _.VERSION, useful when code needs to run with different versions of Lodash.</aside>
+				</section>
+				<section>
+					<h2>Thank you!</h2>
+					<aside class="notes">In conclusion I want to say that, although there are a lot of  native methods that could
+						replace Lodash methods, this library is still very powerful and useful. Maybe for someone it is more
+						convenient to use Lodash. So using it or not is your personal choice, but I recommend you to try it.
+
+						That’s all.
+						Thanks for watching.Bye.</aside>
+				</section>
 			</div>
 		</div>
-
 		<script src="js/reveal.js"></script>
 
 		<script>
